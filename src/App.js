@@ -4,10 +4,9 @@ import Map from "./components/Map";
 function App() {
   const savedLatitude = sessionStorage.getItem("lat");
   const savedLongtitude = sessionStorage.getItem("lng");
-  const savedData = JSON.parse(sessionStorage.getItem("data")) 
- console.log(savedData)
+  const savedData = JSON.parse(sessionStorage.getItem("data"));
   const [inputValue, setInputValue] = useState("");
-  const [data, setData] = useState(savedData ? savedData : '');
+  const [data, setData] = useState(savedData ? savedData : "");
   const [latitude, setLatitude] = useState(savedLatitude ? savedLatitude : 12);
   const [longtitude, setLongtitude] = useState(
     savedLongtitude ? savedLongtitude : 12
@@ -15,10 +14,10 @@ function App() {
 
   useEffect(() => {
     if (savedLatitude && savedLatitude !== latitude) {
-      let stringData = JSON.stringify(data)
+      let stringData = JSON.stringify(data);
       sessionStorage.setItem("lat", latitude);
       sessionStorage.setItem("lng", longtitude);
-      sessionStorage.setItem("data", stringData); 
+      sessionStorage.setItem("data", stringData);
       window.location.reload(false);
     }
   }, [latitude, longtitude]);
@@ -33,10 +32,11 @@ function App() {
   };
   const fetchData = async () => {
     const response = await fetch(
-      `https://geo.ipify.org/api/v2/country,city?apiKey=at_7PyOg1PONBibJRzZWUbbMjjqHlWDY&ipAddress=${inputValue}`
+      `https://geo.ipify.org/api/v2/country,city?apiKey=at_7PyOg1PONBibJRzZWUbbMjjqHlWDY&domain=${inputValue}`
     );
 
     const data = await response.json();
+    console.log(data);
     const dataObject = {
       address: data.ip,
       location: `${data.location.city}, ${data.location.region} ${
@@ -46,8 +46,8 @@ function App() {
       isp: data.isp,
     };
     setData(dataObject);
-    const dataString = JSON.stringify(dataObject)
-    sessionStorage.setItem("data", dataString)
+    const dataString = JSON.stringify(dataObject);
+    sessionStorage.setItem("data", dataString);
     setLatitude(data.location.lat);
     sessionStorage.setItem("lat", data.location.lat);
     setLongtitude(data.location.lng);
