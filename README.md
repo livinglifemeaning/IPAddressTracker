@@ -31,4 +31,4 @@ Users should be able to:
 ### Notes
 Est Time: 2.5hrs | Actual Time: 3hrs 10m
 
-- Did not figure out how to get map to update on its own, and instead had to use sessionStorage and manual refresh to get it to work. Want to come back and figure out how to get map to refresh just by change in state. 
+- Did not figure out how to get map to update on its own, and instead had to use sessionStorage and manual refresh to get it to work. Want to come back and figure out how to get map to refresh just by change in state. This would allow me to set initial data as user's ip address. 
